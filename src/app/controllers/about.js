@@ -1,5 +1,5 @@
-const data = require('../../../data.json');
-
-exports.show = function (req, res) {
-  return res.render('abouts/show', { abouts: data.abouts });
+module.exports = {
+  show(req, res) {
+    return res.render('abouts/show');
+  }
 };
