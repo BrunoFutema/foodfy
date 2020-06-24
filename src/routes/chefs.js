@@ -1,5 +1,6 @@
 const express = require('express');
 const routes = express.Router();
+const multer = require('../app/middlewares/multer');
 
 const ChefController = require('../app/controllers/ChefController');
 
@@ -12,7 +13,7 @@ routes.get('/create', ChefController.create);
 routes.get('/:id', ChefController.show);
 routes.get('/:id/edit', ChefController.edit);
 
-routes.post('/', onlyUsers, Validator.post, ChefController.post);
+routes.post('/', onlyUsers, multer.single('avatar'), Validator.post, ChefController.post);
 routes.put('/', onlyUsers, Validator.put, ChefController.put);
 routes.delete('/', onlyUsers, ChefController.delete);
 

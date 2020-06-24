@@ -12,36 +12,22 @@ const chefs = require('./chefs');
 
 routes.get('/', HomeController.index);
 
+function isAdmin(req, res, next) {
+  req.admin = true;
+
+  next();
+};
+
 routes.get('/about', (req, res) => {
   return res.render('about/show', { abouts: data.abouts });
 });
 
-routes.get('/recipes', (req, res, next) => {
-  const admin = false;
-  req.admin = admin;
+routes.get('/recipes', isAdmin, RecipeController.index);
+routes.get('/recipes/search', isAdmin, SearchController.index);
+routes.get('/recipes/:id', isAdmin, RecipeController.show);
+routes.get('/chefs', isAdmin, ChefController.index);
 
-  next();
-}, RecipeController.index);
-routes.get('/recipes/search', (req, res, next) => {
-  const admin = false;
-  req.admin = admin;
-
-  next();
-}, SearchController.index);
-routes.get('/recipes/:id', (req, res, next) => {
-  const admin = false;
-  req.admin = admin;
-
-  next();
-}, RecipeController.show);
-routes.get('/chefs', (req, res, next) => {
-  const admin = false;
-  req.admin = admin;
-
-  next();
-}, ChefController.index);
-
-routes.use('/admin/recipes', recipes);
-routes.use('/admin/chefs', chefs);
+routes.use('/admin/recipes', isAdmin, recipes);
+routes.use('/admin/chefs', isAdmin, chefs);
 
 module.exports = routes;
