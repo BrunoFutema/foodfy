@@ -1,44 +1,75 @@
-<div class="recipe-details">
-  <img src="{{recipe.image}}" alt="Imagem de {{recipe.title}}">
-  <div class="title">
-    <strong>{{recipe.title}}</strong>
-    <span>por {{recipe.author}}</span>
+<div class="items">
+  <div class="item">
+    <strong>Imagem da receita</strong>
+    <input
+      type="url"
+      name="image"
+      placeholder="https://"
+      value="{{ recipe.image }}"
+    >
   </div>
-  <section class="detail-section">
-    <div class="header">
-      <strong>Ingredientes</strong>
-      <span class="show">ESCONDER</span>
-    </div>
-    <div class="details">
-      <ul>
+  <div class="item">
+    <strong>Título da receita</strong>
+    <input
+      type="text"
+      name="title"
+      placeholder="Qual é o título da receita"
+      value="{{ recipe.title }}"
+    >
+  </div>
+  <div class="item">
+    <strong>Autor da receita</strong>
+    {# <input
+      type="text"
+      name="author"
+      placeholder="Quem criou essa receita?"
+      value="{{ recipe.author }}"
+    > #}
+    <select name="chef_id">
+      <option value="0">Selecione um chef</option>
+      {% for chef in chefs %}
+        <option value="{{chef.id}}">{{chef.name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="item">
+    <strong>Ingredientes</strong>
+    <div id="ingredients">
+      {% if recipe == null %}
+        <div class="ingredient">
+          <input type="text" name="ingredients[]" value="" placeholder="Adicione os ingredientes da sua receita." />
+        </div>
+      {% endif %}
+      {% if recipe != null %}
         {% for ingredient in recipe.ingredients %}
-          <li>{{ ingredient }}</li>
+          <div class="ingredient">
+            <input type="text" name="ingredients[]" value="{{ ingredient }}" placeholder="Adicione os ingredientes da sua receita." />
+          </div>
         {% endfor %}
-      </ul>
+      {% endif %}
     </div>
-  </section>
-  <section class="detail-section">
-    <div class="header">
-      <strong>Modo de preparo</strong>
-      <span class="show">ESCONDER</span>
-    </div>
-    <div class="details">
-      <ul>
+    <button type="button" class="add-ingredient">Adicionar novo ingrediente</button>
+  </div>
+  <div class="item">
+    <strong>Modo de preparo</strong>
+    <div id="preparations">
+      {% if recipe == null %}
+        <div class="preparation">
+          <input type="text" name="preparations[]" value="" placeholder="Adicione os passos do modo de preparo." />
+        </div>
+      {% endif %}
+      {% if recipe != null %}
         {% for preparation in recipe.preparations %}
-          <li>{{ preparation }}</li>
+          <div class="preparation">
+            <input type="text" name="preparation[]" value="{{ preparation }}" placeholder="Adicione os passos do modo de preparo." />
+          </div>
         {% endfor %}
-      </ul>
+      {% endif %}
     </div>
-  </section>
-  <section class="detail-section">
-    <div class="header">
-      <strong>Informações adicionais</strong>
-      <span class="show">ESCONDER</span>
-    </div>
-    <div class="details">
-      <p>{{ recipe.information }}</p>
-    </div>
-  </section>
+    <button type="button" class="add-preparation">Adicionar novo passo</button>
+  </div>
+  <div class="item">
+    <strong>Informações adicionais</strong>
+    <textarea name="information" value="{{ recipe.information }}" placeholder="Escreva informações mais detalhadas sobre sua receita."></textarea>
+  </div>
 </div>
-
-<script src="/scripts.js"></script>

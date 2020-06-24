@@ -1,0 +1,25 @@
+<header id="main-header">
+  <nav class="content links">
+    <div class="navbar">
+      <img onclick="window.location.href='/'" src="/assets/logo-dark.png" alt="Logo do Foodfy">
+      <a href="/about">Sobre</a>
+      <a href="/recipes">Receitas</a>
+      <a href="/admin/chefs">Chefs</a>
+    </div>
+    <form class="search" action="/recipes/search" method="GET">
+      <input
+        type="text"
+        name="filter"
+        placeholder="Buscar uma receita"
+        {% if search.term %}
+          value=="{{search.term}}"
+        {% endif %}
+      >
+      <button type="submit">Buscar</button>
+    </form>
+    <div class="restrict-area">
+      <a href="/admin/recipes">Acesso à área restrita</a>
+      <span class="material-icons">supervised_user_circle</span>
+    </div>
+  </nav>
+</header>

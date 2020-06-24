@@ -1,0 +1,39 @@
+{% extends 'layout.njk' %}
+
+{% block head %}
+  <title>Foodfy - Editar chef {{chef.name}}</title>
+{% endblock %}
+{% block content %}
+  <main>
+    <section class="chef-section">
+      <div class="content">
+        <div class="header-chef">
+          <strong>Chef: {{chef.name}}</strong>
+          <a href="/admin/chefs/{{chef.id}}/edit">Editar Chef</a>
+        </div>
+        <div class="profile-chef">
+          <img src="{{chef.avatar_url}}" alt="Foto de perfil de {{chef.name}}">
+          <strong>{{chef.name}}</strong>
+          <span>{{quantityRecipes}} receitas</span>
+        </div>
+        <div class="recipes-chef">
+          <div class="recipes-header">
+            <strong>Receitas</strong>
+          </div>
+          <div class="recipes-grid-chef">
+            {% for recipe in recipes %}
+              <div class="recipe-chef">
+                <img src="{{recipe.image}}" alt="Imagem de {{recipe.title}}">
+                <div>
+                  <strong>{{recipe.title}}</strong>
+                  <span>por {{recipe.author}}</span>
+                  <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock %}
