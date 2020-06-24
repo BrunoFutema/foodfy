@@ -1,4 +1,5 @@
 const Chef = require('../models/Chef');
+const File = require('../models/File');
 const LoadChefService = require('../services/LoadChefService');
 const LoadRecipeService = require('../services/LoadRecipeService');
 
@@ -19,11 +20,16 @@ module.exports = {
   },
   async post(req, res) {
     try {
-      let { name, avatar_url } = req.body;
+      let { name } = req.body;
 
-      await Chef.create({ name, avatar_url });
+      const file_id = await File.create({
+        name: req.file.filename,
+        path: req.file.path,
+      });
 
-      return res.redirect('/admin/chefs');
+      const chef_id = await Chef.create({ name, file_id });
+        
+      return res.redirect(`/admin/chefs/${chef_id}/edit`);
     } catch (err) {
       console.error(err);
     }
