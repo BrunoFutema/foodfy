@@ -13,6 +13,12 @@ async function getImages(recipeId) {
   return files;
 };
 
+async function getAuthor(recipeId) {
+  let author = await Recipe.author(recipeId);
+
+  return author;
+};
+
 async function format(recipe) {
   const files = await getImages(recipe.id);
 
@@ -21,6 +27,10 @@ async function format(recipe) {
   if (recipe.img) recipe.img = recipe.img.replace('\\', '/').replace('\\', '/');
 
   recipe.files = files;
+
+  const chef = await getAuthor(recipe.id);
+
+  recipe.author = chef.name;
 
   const { day, hour, minutes, month } = date(recipe.updated_at);
 

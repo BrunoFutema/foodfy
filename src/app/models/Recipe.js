@@ -5,33 +5,6 @@ Base.init({ table: 'recipes' });
 
 module.exports = {
   ...Base,
-  async insert(fields) {
-    try {
-      let keys = [], values = [];
-
-      Object.keys(fields).map(key => {
-        keys.push(key);
-        if (typeof fields[key] === 'object') {
-          values.push(`'{${fields[key]}}'`);
-        } else {
-          values.push(`'${fields[key]}'`);
-        }
-      });
-
-      const query = `INSERT INTO ${this.table} (${keys.join(',')})
-        VALUES (${values.join(',')})
-        RETURNING id
-      `;
-
-      console.log(query);
-
-      const results = await db.query(query);
-
-      return results.rows[0].id;
-    } catch (err) {
-      console.error(err);
-    }
-  },
   async files(id) {
     const results = await db.query(`
       SELECT files.* FROM files
@@ -40,6 +13,15 @@ module.exports = {
     `, [id]);
 
     return results.rows;
+  },
+  async author(id) {
+    const results = await db.query(`
+      SELECT chefs.* FROM chefs
+      LEFT JOIN recipes ON chefs.id = recipes.chef_id
+      WHERE recipes.id = $1
+    `, [id]);
+
+    return results.rows[0];
   },
   async search({ filter }) {
     let query = `
@@ -51,7 +33,9 @@ module.exports = {
       query += ` AND (recipes.title ILIKE '%${filter}%')`;
     }
 
+    query += 'ORDER BY updated_at DESC';
+
     const results = await db.query(query);
     return results.rows;
-  }
+  },
 };

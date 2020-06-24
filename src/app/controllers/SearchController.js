@@ -1,4 +1,3 @@
-const Chef = require('../models/Chef');
 const Recipe = require('../models/Recipe');
 const LoadRecipeService = require('../services/LoadRecipeService');
 
@@ -11,14 +10,7 @@ module.exports = {
 
       let recipes = await Recipe.search({ filter });
 
-      const recipesPromise = recipes.map(async (recipe) => {
-        const chef = await Chef.find(recipe.chef_id);
-        
-        return {
-          ...recipe,
-          author: chef.name,
-        };
-      });
+      const recipesPromise = recipes.map(LoadRecipeService.format);
       
       recipes = await Promise.all(recipesPromise);
       

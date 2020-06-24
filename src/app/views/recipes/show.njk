@@ -8,9 +8,10 @@
     <section class="content">
       <div class="header-recipe">
         <strong>Receita: {{ recipe.title }}</strong>
-        <a href="/admin/recipes/{{ recipe.index }}/edit">Editar receita</a>
+        <a href="/admin/recipes/{{recipe.id}}/edit">Editar receita</a>
       </div>
       {% include 'recipes/details.njk' %}
     </section>
   </main>
+  <script src="/scripts/gallery.js"></script>
 {% endblock %}

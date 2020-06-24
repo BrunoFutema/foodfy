@@ -41,7 +41,7 @@ module.exports = {
     try {
       let { title, chef_id, ingredients, preparation, information } = req.body;
 
-      const recipe_id = await Recipe.insert({
+      const recipe_id = await Recipe.create({
         title,
         chef_id,
         ingredients,
@@ -79,7 +79,7 @@ module.exports = {
 
       if (req.admin) return res.render('admin/recipes/show', { recipe });
 
-      return res.render('admin/recipes/show', { recipe });
+      return res.render('recipes/show', { recipe });
     } catch (err) {
       console.error(err);
     }

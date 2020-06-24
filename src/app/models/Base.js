@@ -46,7 +46,11 @@ const Base = {
 
       Object.keys(fields).map(key => {
         keys.push(key);
-        values.push(`'${fields[key]}'`);
+        if (typeof fields[key] === 'object') {
+          values.push(`'{${fields[key]}}'`);
+        } else {
+          values.push(`'${fields[key]}'`);
+        }
       });
 
       const query = `INSERT INTO ${this.table} (${keys.join(',')})

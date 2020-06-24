@@ -13,8 +13,8 @@
       </div>
       <div class="recipes-grid">
         {% for recipe in recipes %}
-          <div class="recipe" onClick="window.location.href='/recipes/{{recipe.id}}'">
-            <img src="{{recipe.image}}" alt="Imagem de {{recipe.title}}">
+          <div class="recipe" id="{{recipe.id}}" onClick="window.location.href='/recipes/{{recipe.id}}'">
+            <img src="{{recipe.img}}" alt="Imagem de {{recipe.title}}">
             <strong>{{recipe.title}}</strong>
             <span>por {{recipe.author}}</span>
           </div>
