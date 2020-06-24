@@ -7,7 +7,7 @@
   <main>
     <section class="recipe-section">
       <div class="content">
-        <form method="POST" action="/admin/recipes">
+        <form method="POST" action="/admin/recipes" enctype="multipart/form-data">
           <div class="header-recipe">
             <strong>Criando receita</strong>
             <button type="submit">Salvar receita</button>
@@ -17,5 +17,5 @@
       </div>
     </section>
   </main>
-  <script src="/create-recipe.js"></script>
+  <script src="/scripts/recipes.js"></script>
 {% endblock %}

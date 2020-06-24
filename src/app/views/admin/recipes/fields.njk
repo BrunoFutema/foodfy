@@ -1,12 +1,36 @@
 <div class="items">
   <div class="item">
-    <strong>Imagem da receita</strong>
-    <input
-      type="url"
-      name="image"
-      placeholder="https://"
-      value="{{ recipe.image }}"
-    >
+    <div class="recipe-photos">
+      <div id="photos-upload">
+        <strong>Imagem da receita</strong>
+        <div class="input">
+          <input
+            id="photos-input"
+            type="file"
+            name="photos"
+            multiple
+            accept="image/*"
+            onchange="PhotosUpload.handleFileInput(event)"
+          >
+          <div>
+            <i class="material-icons">add</i>
+          </div>
+        </div>
+      </div>
+      <div id="photos-preview">
+        {% if recipe.files %}
+          {% for image in recipe.files %}
+            <div class="photo" id="{{image.id}}">
+              <img src="{{image.src}}" alt="{{image.name}}">
+              <i class="material-icons"
+                onclick="PhotosUpload.removeOldPhoto(event)"
+              >close</i>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <input type="hidden" name="removed_files">
+    </div>
   </div>
   <div class="item">
     <strong>Título da receita</strong>
@@ -19,16 +43,10 @@
   </div>
   <div class="item">
     <strong>Autor da receita</strong>
-    {# <input
-      type="text"
-      name="author"
-      placeholder="Quem criou essa receita?"
-      value="{{ recipe.author }}"
-    > #}
     <select name="chef_id">
       <option value="0">Selecione um chef</option>
       {% for chef in chefs %}
-        <option value="{{chef.id}}">{{chef.name}}</option>
+        <option value="{{chef.id}}" {% if recipe.chef_id == chef.id %} selected {% endif %} >{{chef.name}}</option>
       {% endfor %}
     </select>
   </div>
@@ -55,11 +73,11 @@
     <div id="preparations">
       {% if recipe == null %}
         <div class="preparation">
-          <input type="text" name="preparations[]" value="" placeholder="Adicione os passos do modo de preparo." />
+          <input type="text" name="preparation[]" value="" placeholder="Adicione os passos do modo de preparo." />
         </div>
       {% endif %}
       {% if recipe != null %}
-        {% for preparation in recipe.preparations %}
+        {% for preparation in recipe.preparation %}
           <div class="preparation">
             <input type="text" name="preparation[]" value="{{ preparation }}" placeholder="Adicione os passos do modo de preparo." />
           </div>
@@ -70,6 +88,6 @@
   </div>
   <div class="item">
     <strong>Informações adicionais</strong>
-    <textarea name="information" value="{{ recipe.information }}" placeholder="Escreva informações mais detalhadas sobre sua receita."></textarea>
+    <textarea name="information" value="{{recipe.information}}" placeholder="Escreva informações mais detalhadas sobre sua receita.">{{recipe.information}}</textarea>
   </div>
 </div>
