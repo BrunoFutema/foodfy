@@ -5,9 +5,9 @@
 {% endblock %}
 {% block content %}
   <main>
-    <section class="recipe-section">
+    <section class="chef-section">
       <div class="content">
-        <form method="POST" action="/admin/chefs">
+        <form method="POST" action="/admin/chefs" enctype="multipart/form-data">
           <div class="header-recipe">
             <strong>Criando chef</strong>
             <button type="submit">Salvar chef</button>
@@ -17,4 +17,5 @@
       </div>
     </section>
   </main>
+  <script src="/scripts/chefs.js"></script>
 {% endblock %}

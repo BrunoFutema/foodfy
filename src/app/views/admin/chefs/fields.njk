@@ -13,13 +13,29 @@
 
   <div class="item">
     <strong>Avatar</strong>
-    <div>
-      <input
-        type="url"
-        name="avatar_url"
-        placeholder="https://"
-        value="{{ chef.avatar_url }}"
-      >
+    <div class="upload">
+      <div id="photo-preview">
+        {% if chef.img %}
+          <div class="photo" id="{{chef.file_id}}">
+            <img src="{{chef.img}}" alt="{{chef.name}}">
+            <i class="material-icons"
+              onclick="PhotosUpload.removeOldPhoto(event)"
+            >close</i>
+          </div>
+          <input type="hidden" name="removed_files">
+        {% endif %}
+      </div>
+      <div id="photo-upload">
+        <input
+          id="photo-input"
+          type="file"
+          class="button"
+          name="avatar"
+          accept="image/*"
+          onchange="PhotosUpload.handleFileInput(event)"
+        >
+        <p>Enviar Avatar</p>
+      </div>
     </div>
   </div>
 </div>
