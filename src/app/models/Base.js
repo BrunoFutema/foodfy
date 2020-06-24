@@ -66,8 +66,13 @@ const Base = {
       let update = [];
 
       Object.keys(fields).map(key => {
-        const line = `${key} = '${fields[key]}'`;
-        update.push(line);
+        if (typeof fields[key] === 'object') {
+          const line = `${key} = '{${fields[key]}}'`;
+          update.push(line);
+        } else {
+          const line = `${key} = '${fields[key]}'`;
+          update.push(line);
+        }
       });
 
       let query = `UPDATE ${this.table} SET
