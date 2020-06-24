@@ -276,7 +276,7 @@ section.admin-recipes .content > strong {
 }
 
 .recipe-section form .item input,
-.recipe-section form .itemselect {
+.recipe-section form .item select {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;

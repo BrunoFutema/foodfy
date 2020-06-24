@@ -7,13 +7,13 @@ module.exports = {
     try {
       const chefs = await LoadChefService.load('chefs');
       
-      return res.render('chefs/index', { chefs });
+      return res.render('admin/chefs/index', { chefs });
     } catch (err) {
       console.error(err);
     }
   },
   create(req, res) {
-    return res.render('chefs/create');
+    return res.render('admin/chefs/create');
   },
   async post(req, res) {
     try {
@@ -41,7 +41,7 @@ module.exports = {
 
       const quantityRecipes = recipes.length;
 
-      return res.render('chefs/show', { chef, quantityRecipes, recipes });
+      return res.render('admin/chefs/show', { chef, quantityRecipes, recipes });
     } catch (err) {
       console.error(err);
     }
@@ -54,7 +54,7 @@ module.exports = {
         },
       });
 
-      return res.render('chefs/edit', { chef });
+      return res.render('admin/chefs/edit', { chef });
     } catch (err) {
       console.error(err);
     }
