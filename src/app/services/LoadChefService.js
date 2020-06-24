@@ -1,7 +1,8 @@
 const Chef = require('../models/Chef');
+const File = require('../models/File');
 
-async function getImage(chefId) {
-  let file = await Chef.file(chefId);
+async function getImage(fileId) {
+  let file = await File.find(fileId);
 
   file.src = `${file.path.replace('public', '')}`;
 
@@ -9,11 +10,11 @@ async function getImage(chefId) {
 };
 
 async function format(chef) {
-  // const file = await getImage(chef.id);
+  const file = await getImage(chef.file_id);
 
-  // chef.img = file.src;
+  chef.img = file.src;
 
-  // if (chef.img) chef.img = chef.img.replace('\\', '/').replace('\\', '/');
+  if (chef.img) chef.img = chef.img.replace('\\', '/').replace('\\', '/');
 
   return chef;
 };

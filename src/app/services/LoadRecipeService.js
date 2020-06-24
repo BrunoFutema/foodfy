@@ -14,20 +14,20 @@ async function getImages(recipeId) {
 };
 
 async function format(recipe) {
-  //const files = await getImages(recipe.id);
+  const files = await getImages(recipe.id);
 
-  //recipe.img = files[0].src;
+  if (files[0]) recipe.img = files[0].src;
 
-  //if (recipe.img) recipe.img = recipe.img.replace('\\', '/').replace('\\', '/');
+  if (recipe.img) recipe.img = recipe.img.replace('\\', '/').replace('\\', '/');
 
-  //recipe.files = files;
+  recipe.files = files;
 
-  // const { day, hour, minutes, month } = date(recipe.updated_at);
+  const { day, hour, minutes, month } = date(recipe.updated_at);
 
-  // recipe.published = {
-  //   day: `${day}/${month}`,
-  //   hour: `${hour}h${minutes}`,
-  // };
+  recipe.published = {
+    day: `${day}/${month}`,
+    hour: `${hour}h${minutes}`,
+  };
 
   return recipe;
 };
