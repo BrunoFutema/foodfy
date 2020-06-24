@@ -52,4 +52,13 @@ module.exports = {
 
     return value;
   },
+  intl(timestamp) {
+    const formatter = new Intl.DateTimeFormat('pt-BR');
+    
+    const day = `0${formatter.format(timestamp).split('-')[2]}`.slice(-2);
+    const month = `0${formatter.format(timestamp).split('-')[1]}`.slice(-2);
+    const year = formatter.format(timestamp).split('-')[0];
+
+    return `${day}/${month}/${year}`;
+  },
 };
