@@ -1,4 +1,6 @@
 const Chef = require('../models/Chef');
+const File = require('../models/File');
+const RecipeFiles = require('../models/RecipeFiles');
 const Recipe = require('../models/Recipe');
 const LoadChefService = require('../services/LoadChefService');
 const LoadRecipeService = require('../services/LoadRecipeService');
@@ -16,9 +18,9 @@ module.exports = {
           author: chef.name,
         };
       });
-  
+
       recipes = await Promise.all(recipesPromise);
-  
+      
       if (req.admin) return res.render('admin/recipes/index', { recipes });
 
       return res.render('recipes/index', { recipes });
@@ -37,18 +39,29 @@ module.exports = {
   },
   async post(req, res) {
     try {
-      let { image, title, chef_id, ingredients, preparation, information } = req.body;
-  
-      const recipe_id = await Recipe.create({
-        image,
+      let { title, chef_id, ingredients, preparation, information } = req.body;
+
+      const recipe_id = await Recipe.insert({
         title,
         chef_id,
         ingredients,
         preparation,
         information,
       });
+
+      req.files.map(async file => {
+        const file_id = await File.create({
+          name: file.filename,
+          path: file.path,
+        });
+
+        await RecipeFiles.create({
+          recipe_id,
+          file_id,
+        });
+      });
       
-      return res.redirect(`/recipes/${recipe_id}/edit`);
+      return res.redirect(`/admin/recipes/${recipe_id}/edit`);
     } catch (err) {
       console.error(err);
     }
@@ -62,6 +75,7 @@ module.exports = {
       const chef = await LoadChefService.load('chef', { where: { id: recipe.chef_id } });
 
       recipe.author = chef.name;
+      recipe.information = recipe.information.split('\n').join('<br />');
 
       if (req.admin) return res.render('admin/recipes/show', { recipe });
 
@@ -78,17 +92,43 @@ module.exports = {
         },
       });
 
-      return res.render('admin/recipes/edit', { recipe });
+      const chefs = await LoadChefService.load('chefs');
+
+      return res.render('admin/recipes/edit', { recipe, chefs });
     } catch (err) {
       console.error(err);
     }
   },
   async put(req, res) {
     try {
-      let { image, title, chef_id, ingredients, preparation, information } = req.body;
+      if (req.files.length != 0) {
+        req.files.map(async file => {
+          const file_id = await File.create({
+            name: file.filename,
+            path: file.path,
+          });
+
+          await RecipeFiles.create({
+            recipe_id: req.body.id,
+            file_id,
+          });
+        });
+      }
+
+      if (req.body.removed_files) {
+        const removedFiles = req.body.removed_files.split(',');
+        const lastIndex = removedFiles.length - 1;
+        removedFiles.splice(lastIndex, 1);
+  
+        removedFiles.map(async id => {
+          await RecipeFiles.deleteByFileId(id);
+          await File.delete(id);
+        });
+      }
+
+      let { title, chef_id, ingredients, preparation, information } = req.body;
     
-      await Recipe.update({
-        image,
+      await Recipe.update(req.body.id, {
         title,
         chef_id,
         ingredients,
