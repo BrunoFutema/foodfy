@@ -19,6 +19,8 @@ module.exports = {
   
       recipes = await Promise.all(recipesPromise);
   
+      if (req.admin) return res.render('admin/recipes/index', { recipes });
+
       return res.render('recipes/index', { recipes });
     } catch (err) {
       console.error(err);
@@ -63,22 +65,48 @@ module.exports = {
 
       if (req.admin) return res.render('admin/recipes/show', { recipe });
 
-      return res.render('recipes/show', { recipe });
+      return res.render('admin/recipes/show', { recipe });
     } catch (err) {
       console.error(err);
     }
   },
-  edit(req, res) {
-    const { index } = req.params;
-  
-    return res.render('admin/edit');
+  async edit(req, res) {
+    try {
+      const recipe = await LoadRecipeService.load('recipe', {
+        where: {
+          id: req.params.id,
+        },
+      });
+
+      return res.render('admin/recipes/edit', { recipe });
+    } catch (err) {
+      console.error(err);
+    }
   },
-  put(req, res) {
-    const { index } = req.body;
-  
-    return res.redirect(`/recipes/${index}`);
+  async put(req, res) {
+    try {
+      let { image, title, chef_id, ingredients, preparation, information } = req.body;
+    
+      await Recipe.update({
+        image,
+        title,
+        chef_id,
+        ingredients,
+        preparation,
+        information,
+      });
+
+      return res.redirect(`/admin/recipes/${req.body.id}`);
+    } catch (err) {
+      console.error(err);
+    }
   },
-  delete(req, res) {
-    return res.redirect('/recipes/create');
+  async delete(req, res) {
+    try {
+      await Recipe.delete(req.body.id);
+      return res.redirect('/admin/recipes');
+    } catch (err) {
+      console.error(err);
+    }
   },
 };

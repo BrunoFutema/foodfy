@@ -1,0 +1,26 @@
+{% extends 'layout.njk' %}
+
+{% block head %}
+  <title>Foodfy - Receitas</title>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock %}
+{% block content %}
+  <main class="recipes">
+    <div class="content recipes-background">
+      <div class="header-recipe">
+        <strong>Buscando por "{{search.term}}"</strong>
+      </div>
+      <div class="recipes-grid">
+        {% for recipe in recipes %}
+          <div class="recipe" onClick="window.location.href='/recipes/{{recipe.id}}'">
+            <img src="{{recipe.image}}" alt="Imagem de {{recipe.title}}">
+            <strong>{{recipe.title}}</strong>
+            <span>por {{recipe.author}}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+  {# <script src="/scripts.js"></script> #}
+{% endblock %}

@@ -7,7 +7,9 @@ module.exports = {
     try {
       const chefs = await LoadChefService.load('chefs');
       
-      return res.render('admin/chefs/index', { chefs });
+      if (req.admin) return res.render('admin/chefs/index', { chefs });
+
+      return res.render('chefs/index', { chefs });
     } catch (err) {
       console.error(err);
     }
