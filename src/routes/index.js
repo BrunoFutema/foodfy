@@ -13,7 +13,7 @@ const chefs = require('./chefs');
 routes.get('/', HomeController.index);
 
 function isAdmin(req, res, next) {
-  req.admin = true;
+  req.admin = false;
 
   next();
 };

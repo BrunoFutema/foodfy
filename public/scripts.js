@@ -3,9 +3,9 @@ const recipes = document.querySelectorAll('.recipe');
 
 for (let recipe of recipes) {
   recipe.addEventListener('click', function () {
-    const recipeIndex = Array.from(recipes).indexOf(recipe);
+    const recipeId = recipe.getAttribute('id');
     
-    window.location.href = `/recipes/${recipeIndex}`;
+    window.location.href = `/recipes/${recipeId}`;
   });
 }
 
