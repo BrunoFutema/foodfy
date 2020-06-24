@@ -5,12 +5,12 @@
 {% endblock %}
 {% block content %}
   <main>
-    <section class="content">
+    <section>
       <div class="header-recipe">
         <strong>Receita: {{ recipe.title }}</strong>
         <a href="/admin/recipes/{{ recipe.index }}/edit">Editar receita</a>
       </div>
-      {% include 'admin/recipes/fields.njk' %}
+      {% include 'recipes/fields.njk' %}
     </section>
   </main>
 {% endblock %}

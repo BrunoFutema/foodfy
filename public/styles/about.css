@@ -1,0 +1,17 @@
+.about {
+  width: 100%;
+  padding-top: 26px;
+}
+
+.about strong {
+  color: #111;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.about p {
+  color: #444;
+  font-size: 18px;
+  line-height: 28px;
+  margin: 20px 0;
+}
