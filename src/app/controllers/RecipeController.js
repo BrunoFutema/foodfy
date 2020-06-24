@@ -55,15 +55,11 @@ module.exports = {
     try {
       const recipe_id = req.params.id;
 
-      console.log(req.params);
-
       let recipe = await LoadRecipeService.load('recipe', { where: { id: recipe_id } });
 
       const chef = await LoadChefService.load('chef', { where: { id: recipe.chef_id } });
 
       recipe.author = chef.name;
-
-      console.log(req.admin);
 
       if (req.admin) return res.render('admin/recipes/show', { recipe });
 
