@@ -21,7 +21,7 @@ header nav {
   width: 100%;
 
   display: grid;
-  grid-template-columns: 1fr 30% 20%;
+  grid-template-columns: 1fr 20%;
 }
 
 header nav .navbar {
@@ -30,18 +30,22 @@ header nav .navbar {
 }
 
 header nav .search {
+  display: none;
+}
+
+header nav .search.show {
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 
-header nav .search input {
+header nav .search.show input {
   border: 1px solid #AAAAAA;
   border-radius: 4px;
   padding: 8px 16px;
 }
 
-header nav .search button {
+header nav .search.show button {
   color: #F0F0F0;
   cursor: pointer;
   background-color: var(--secondary-color);
@@ -52,11 +56,15 @@ header nav .search button {
   margin-left: 10px;
 }
 
-header nav .search button:hover {
+header nav .search.show button:hover {
   filter: brightness(90%);
 }
 
 header nav .restrict-area {
+  display: none;
+}
+
+header nav .restrict-area.show {
   display: flex;
   align-items: center;
   justify-content: space-between;

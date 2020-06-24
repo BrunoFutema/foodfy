@@ -1,0 +1,106 @@
+.recipe-section form .item .recipe-photos {
+  display: flex;
+}
+
+.recipe-section form .item .recipe-photos strong {
+  margin-bottom: 10px;
+}
+
+.recipe-section form .item #photos-upload {
+  position: relative;
+
+  display: block;
+  overflow: hidden;
+
+  width: 170px;
+}
+
+.recipe-section form .item #photos-upload .input {
+  position: relative;
+  height: 140px;
+}
+
+.recipe-section form .item #photos-upload div {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #777;
+
+  width: 140px;
+  height: 140px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-section form .item #photos-upload div i {
+  font-size: 36px;
+}
+
+.recipe-section form .item #photos-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+
+  cursor: pointer;
+}
+
+.recipe-section form .item #photos-preview {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  margin-left: 5px;
+}
+
+.recipe-section form .item #photos-preview img {
+  width: 140px;
+  height: 140px;
+
+  border-radius: 4px;
+
+  object-fit: cover;
+
+  margin-bottom: -3px;
+}
+
+.recipe-section form #photos-preview .photo {
+  position: relative;
+}
+
+.recipe-section form #photos-preview .photo + .photo {
+  margin-left: 10px;
+}
+
+.recipe-section form #photos-preview .photo i {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background: rgba(255, 255, 255, 0.8);
+
+  color: #ff0000;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 500%;
+  cursor: pointer;
+
+  transition: opacity 200ms;
+
+  opacity: 0;
+}
+
+.recipe-section form #photos-preview .photo:hover i {
+  opacity: 1;
+}
