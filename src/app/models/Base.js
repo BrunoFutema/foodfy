@@ -1,6 +1,6 @@
 const db = require('../../config/db');
 
-function find(filters, table) {
+function find(filters, table, order) {
   let query = `SELECT * FROM ${table}`;
 
   if (filters) {
@@ -10,6 +10,14 @@ function find(filters, table) {
       Object.keys(filters[key]).map(field => {
         query += ` ${field} = '${filters[key][field]}'`;
       });
+    });
+  }
+
+  if (order) {
+    Object.keys(order).map(key => {
+      query += ` ORDER BY`;
+
+      query += ` ${key} ${order[key]}`;
     });
   }
 
@@ -32,8 +40,8 @@ const Base = {
     const results = await find(filters, this.table);
     return results.rows[0];
   },
-  async findAll(filters) {
-    const results = await find(filters, this.table);
+  async findAll(filters, order) {
+    const results = await find(filters, this.table, order);
     return results.rows;
   },
   async findOneWithDeleted(filters) {
