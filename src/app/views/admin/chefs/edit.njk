@@ -11,9 +11,9 @@
           <input type="hidden" name="id" value="{{ chef.id }}">
           <button type="submit">Deletar</button>
         </form>
-        <form method="POST" action="/admin/chefs">
+        <form method="POST" action="/admin/chefs?_method=PUT" enctype="multipart/form-data">
           <div class="header-chef">
-            <strong>Criando chef</strong>
+            <strong>Editando chef</strong>
             <input type="hidden" name="id" value="{{ chef.id }}">
             <button type="submit">Salvar chef</button>
           </div>
@@ -22,4 +22,5 @@
       </div>
     </section>
   </main>
+  <script src="/scripts/chefs.js"></script>
 {% endblock %}

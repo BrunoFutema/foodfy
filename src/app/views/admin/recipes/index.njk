@@ -1,25 +1,27 @@
 {% extends 'layout.njk' %}
 
 {% block content %}
-  <section class="admin-recipes">
-    <div class="content">
-      <div class="header-recipe">
-        <strong>Gerenciar receitas</strong>
-        <a href="/admin/recipes/create">Cadastrar receita</a>
-      </div>
-      <div class="grid-recipes">
-        {% for recipe in recipes %}
-          <div class="recipe-admin">
-            <section class="image" style="background: url({{ recipe.img }}) no-repeat center center / cover;">
-            </section>
-            <div class="recipe-details">
-              <strong>{{ recipe.title }}</strong>
-              <span>por {{ recipe.author }}</span>
-              <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
+  <main>
+    <section class="admin-recipes">
+      <div class="content">
+        <div class="header-recipe">
+          <strong>Gerenciar receitas</strong>
+          <a href="/admin/recipes/create">Cadastrar receita</a>
+        </div>
+        <div class="grid-recipes">
+          {% for recipe in recipes %}
+            <div class="recipe-admin">
+              <section class="image" style="background: url({{ recipe.img }}) no-repeat center center / cover;">
+              </section>
+              <div class="recipe-details">
+                <strong>{{ recipe.title }}</strong>
+                <span>por {{ recipe.author }}</span>
+                <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
+              </div>
             </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 {% endblock %}

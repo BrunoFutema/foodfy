@@ -1,0 +1,29 @@
+{% extends 'layout.njk' %}
+
+{% block head %}
+  <title>Foodfy - Editar usuário</title>
+{% endblock %}
+{% block content %}
+  <main>
+    <section class="user-section">
+      <div class="content">
+        <form id="form-delete" method="POST" action="/admin/users?_method=DELETE">
+          <input type="hidden" name="id" value="{{ user.id }}">
+          <button type="submit">Deletar</button>
+        </form>
+        <form method="POST" action="/admin/users?_method=PUT">
+          <div class="header-user">
+            <strong>Atualizar Usuário</strong>
+            <input type="hidden" name="id" value="{{ user.id }}">
+            <button type="submit">Salvar</button>
+          </div>
+          {% include 'admin/users/fields.njk' %}
+          <div class="is-admin">
+            <input type="checkbox" name="is_admin" {% if user.is_admin %} checked {% endif %}>
+            <strong>Administrador</strong>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+{% endblock %}

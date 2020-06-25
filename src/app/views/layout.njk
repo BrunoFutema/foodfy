@@ -8,12 +8,14 @@
     {% include 'parts/styles.njk' %}
   </head>
   <body>
+    {% include 'parts/messages.njk' %}
+    
     {% include 'parts/header.njk' %}
 
     {% block content %}{% endblock %}
 
     {% include 'parts/footer.njk' %}
     
-    <script src="/dark-theme.js"></script>
+    <script src="/scripts.js"></script>
   </body>
 </html>

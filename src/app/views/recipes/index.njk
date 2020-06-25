@@ -7,31 +7,16 @@
 {% endblock %}
 {% block content %}
   <main class="recipes">
-    <div class="content recipes-background">
+    <section class="content recipes-background">
       <div class="recipes-grid">
         {% for recipe in recipes %}
-          <div class="recipe" onClick="window.location.href='/recipes/{{recipe.id}}'">
+          <div class="recipe" id="{{recipe.id}}" onClick="window.location.href='/recipes/{{recipe.id}}'">
             <img src="{{recipe.img}}" alt="Imagem de {{recipe.title}}">
             <strong>{{recipe.title}}</strong>
             <span>por {{recipe.author}}</span>
           </div>
         {% endfor %}
       </div>
-    </div>
+    </section>
   </main>
-  <div class="modal-overlay">
-    <div class="modal">
-      <a class="close-modal">
-        <i class="material-icons">close</i>
-      </a>
-      <div class="modal-content">
-        <img src="/assets/burger.png" alt="Imagem de Triplo bacon burger">
-        <div class="modal-content__info">
-          <strong></strong>
-          <span></span>
-        </div>
-      </div>
-    </div>
-  </div>
-  {# <script src="/scripts.js"></script> #}
 {% endblock %}

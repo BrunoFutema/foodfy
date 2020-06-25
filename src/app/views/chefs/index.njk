@@ -7,7 +7,13 @@
 {% endblock %}
 {% block content %}
   <main class="chefs">
-    <div class="content chefs-background">
+    <section class="content chefs-section">
+      {% if session.user.is_admin %}
+        <div class="header-chef">
+          <strong>Gerenciar chefs</strong>
+          <a href="/admin/chefs/create">Novo</a>
+        </div>
+      {% endif %}
       <div class="chefs-grid">
         {% for chef in chefs %}
           <div class="chef">
@@ -19,7 +25,7 @@
           </div>
         {% endfor %}
       </div>
-    </div>
+    </section>
   </main>
   <div class="modal-overlay">
     <div class="modal">
@@ -35,5 +41,4 @@
       </div>
     </div>
   </div>
-  <script src="/scripts.js"></script>
 {% endblock %}

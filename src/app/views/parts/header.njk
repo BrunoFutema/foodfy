@@ -1,25 +1,60 @@
-<header id="main-header">
-  <nav class="content links">
+<header id="main-header" {% if session.user %} class="dark" {% endif %}>
+  <nav
+    class="content links"
+    {% if session.user %}
+      style="grid-template-columns: 1fr 20% 12%;"
+    {% else %}
+      style="grid-template-columns: 1fr 20% 4%;"
+    {% endif %}
+  >
     <div class="navbar">
-      <img onclick="window.location.href='/'" src="/assets/logo-dark.png" alt="Logo do Foodfy">
-      <a href="/about">Sobre</a>
+      {% if session.user %}
+        <img onclick="window.location.href='/'" src="/assets/logo-light.png" alt="Logo do Foodfy">
+      {% else %}
+        <img onclick="window.location.href='/'" src="/assets/logo-dark.png" alt="Logo do Foodfy">
+        <a href="/about">Sobre</a>
+      {% endif %}
       <a href="/recipes">Receitas</a>
       <a href="/chefs">Chefs</a>
-    </div>
-    <form class="search" action="/recipes/search" method="GET">
-      <input
-        type="text"
-        name="filter"
-        placeholder="Buscar uma receita"
-        {% if search.term %}
-          value="{{search.term}}"
+      {% if session.user %}
+        {% if session.user.is_admin %}
+          <a href="/admin/users">Usuários</a>
         {% endif %}
-      >
-      <button type="submit">Buscar</button>
-    </form>
-    <div class="restrict-area">
-      <a href="/admin/recipes">Acesso à área restrita</a>
-      <span class="material-icons">supervised_user_circle</span>
+      {% endif %}
     </div>
+    <div class="search-area">
+      <form class="search show" action="/recipes/search" method="GET">
+        <input
+          type="text"
+          name="filter"
+          placeholder="Buscar uma receita"
+          {% if search.term %}
+            value="{{search.term}}"
+          {% endif %}
+        >
+        <button type="submit">Buscar</button>
+      </form>
+    </div>
+    {% if session.user %}
+      <div class="restrict-area">
+        <div>  
+          <a href="/admin/profile" id="account">
+            <span class="material-icons">account_circle</span>
+          </a>
+          <form method="POST" action="/session/logout">
+            <button type="submit">
+              Sair
+              <span class="material-icons">power_settings_new</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    {% else %}
+      <div class="restrict-area">
+        <a href="/accounts">
+          <i class="material-icons">login</i>
+        </a>
+      </div>
+    {% endif %}
   </nav>
 </header>

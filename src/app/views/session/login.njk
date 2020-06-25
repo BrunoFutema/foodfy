@@ -1,0 +1,46 @@
+{% block head %}
+  <title>Foodfy - Login</title>
+  {% include 'parts/styles.njk' %}
+{% endblock %}
+{% block content %}
+  {% include 'parts/messages.njk' %}
+  <main class="login">
+    <div class="content">
+      <div class="header-login">
+        <a href="/">
+          <img src="/assets/logo-dark.png" alt="Logo do Foodfy">
+        </a>
+      </div>
+      <form method="POST" action="/session/login">
+        <strong>Iniciar Sessão</strong>
+        <div class="items">
+          <div class="item">
+            <strong>Email</strong>
+            <div>
+              <input
+                type="email"
+                name="email"
+                placeholder="Digite seu email"
+              >
+            </div>
+          </div>
+          <div class="item">
+            <strong>Senha</strong>
+            <div>
+              <input
+                type="password"
+                name="password"
+                placeholder="Digite sua senha"
+              >
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <a href="/session/forgot-password">
+            <span>Perdeu a senha?</span>
+          </a>
+          <button type="submit" class="button">Acessar</button>
+        </div>
+      </form>
+  </main>
+{% endblock %}

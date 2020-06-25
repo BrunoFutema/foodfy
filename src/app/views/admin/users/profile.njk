@@ -1,0 +1,35 @@
+{% extends 'layout.njk' %}
+
+{% block head %}
+  <title>Foodfy - {{user.name}}</title>
+{% endblock %}
+{% block content %}
+  <main>
+    <section class="user-section">
+      <div class="content">
+        <form method="POST" action="/admin/profile?_method=PUT">
+          <div class="header-user">
+            <strong>Bem vindo {{user.name}}</strong>
+            <div>
+              <input type="hidden" name="id" value="{{user.id}}">
+              <button type="submit">Salvar</button>
+            </div>
+          </div>
+          {% include 'admin/users/fields.njk' %}
+          <div class="items">
+            <div class="item">
+              <strong>Senha</strong>
+              <div>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Digite a senha"
+                >
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+{% endblock %}

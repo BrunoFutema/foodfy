@@ -9,7 +9,9 @@
       <div class="content">
         <div class="header-chef">
           <strong>Chef: {{chef.name}}</strong>
-          <a href="/admin/chefs/{{chef.id}}/edit">Editar Chef</a>
+          {% if session.user.is_admin %}
+            <a href="/admin/chefs/{{chef.id}}/edit">Editar Chef</a>
+          {% endif %}
         </div>
         <div class="profile-chef">
           <img src="{{chef.img}}" alt="Foto de perfil de {{chef.name}}">

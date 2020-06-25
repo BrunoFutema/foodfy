@@ -8,7 +8,9 @@
     <section class="content">
       <div class="header-recipe">
         <strong>Receita: {{ recipe.title }}</strong>
-        <a href="/admin/recipes/{{recipe.id}}/edit">Editar receita</a>
+        {% if session.user.is_admin %}
+          <a href="/admin/recipes/{{recipe.id}}/edit">Editar receita</a>
+        {% endif %}
       </div>
       {% include 'recipes/details.njk' %}
     </section>
