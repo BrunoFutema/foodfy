@@ -43,8 +43,9 @@ async function format(recipe) {
 };
 
 const LoadServices = {
-  load(service, filter) {
+  load(service, filter, order) {
     this.filter = filter;
+    this.order = order;
     return this[service]();
   },
   async recipe() {
@@ -57,7 +58,7 @@ const LoadServices = {
   },
   async recipes() {
     try {
-      const recipes = await Recipe.findAll(this.filter);
+      const recipes = await Recipe.findAll(this.filter, this.order);
       const recipesPromise = recipes.map(format);
 
       return Promise.all(recipesPromise);
