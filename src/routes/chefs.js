@@ -4,17 +4,17 @@ const multer = require('../app/middlewares/multer');
 
 const ChefController = require('../app/controllers/ChefController');
 
-const { onlyUsers } = require('../app/middlewares/session');
+const { onlyUsers, onlyAdmin } = require('../app/middlewares/session');
 
 const Validator = require('../app/validators/chef');
 
 routes.get('/', ChefController.index);
-routes.get('/create', ChefController.create);
-routes.get('/:id', ChefController.show);
-routes.get('/:id/edit', ChefController.edit);
+routes.get('/create', onlyUsers, onlyAdmin, ChefController.create);
+routes.get('/:id', onlyUsers, ChefController.show);
+routes.get('/:id/edit', onlyUsers, onlyAdmin, ChefController.edit);
 
-routes.post('/', onlyUsers, multer.single('avatar'), Validator.post, ChefController.post);
-routes.put('/', onlyUsers, Validator.put, ChefController.put);
-routes.delete('/', onlyUsers, ChefController.delete);
+routes.post('/', onlyUsers, onlyAdmin, multer.single('avatar'), Validator.post, ChefController.post);
+routes.put('/', onlyUsers, onlyAdmin, multer.single('avatar'), Validator.put, ChefController.put);
+routes.delete('/', onlyUsers, onlyAdmin, ChefController.delete);
 
 module.exports = routes;
