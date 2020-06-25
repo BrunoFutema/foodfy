@@ -8,7 +8,9 @@ const LoadRecipeService = require('../services/LoadRecipeService');
 module.exports = {
   async index(req, res) {
     try {
-      let recipes = await LoadRecipeService.load('recipes');
+      let recipes = await LoadRecipeService.load('recipes', null, {
+        created_at: 'DESC'
+      });
   
       const recipesPromise = recipes.map(async (recipe) => {
         const chef = await Chef.find(recipe.chef_id);
@@ -21,7 +23,10 @@ module.exports = {
 
       recipes = await Promise.all(recipesPromise);
       
-      if (req.admin) return res.render('admin/recipes/index', { recipes });
+      if (req.session.user) {
+        if (req.session.user.is_admin) 
+          return res.render('admin/recipes/index', { recipes });
+      }
 
       return res.render('recipes/index', { recipes });
     } catch (err) {
@@ -77,8 +82,6 @@ module.exports = {
       recipe.author = chef.name;
       recipe.information = recipe.information.split('\n').join('<br />');
 
-      if (req.admin) return res.render('admin/recipes/show', { recipe });
-
       return res.render('recipes/show', { recipe });
     } catch (err) {
       console.error(err);
@@ -127,6 +130,12 @@ module.exports = {
       }
 
       let { title, chef_id, ingredients, preparation, information } = req.body;
+
+      const recipe = await Recipe.find(req.body.id);
+
+      if (recipe.user_id != req.session.userId) return res.render('admin/users/index', {
+        error: 'Você não pode editar uma receita de outro usuário!',
+      });
     
       await Recipe.update(req.body.id, {
         title,
@@ -143,6 +152,12 @@ module.exports = {
   },
   async delete(req, res) {
     try {
+      const recipe = await Recipe.find(req.body.id);
+
+      if (recipe.user_id != req.session.userId) return res.render('admin/users/index', {
+        error: 'Você não pode excluir uma receita de outro usuário!',
+      });
+
       await Recipe.delete(req.body.id);
       return res.redirect('/admin/recipes');
     } catch (err) {

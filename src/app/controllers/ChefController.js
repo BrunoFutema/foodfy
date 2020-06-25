@@ -6,9 +6,9 @@ const LoadRecipeService = require('../services/LoadRecipeService');
 module.exports = {
   async index(req, res) {
     try {
-      const chefs = await LoadChefService.load('chefs');
-      
-      if (req.admin) return res.render('admin/chefs/index', { chefs });
+      const chefs = await LoadChefService.load('chefs', null, {
+        created_at: 'DESC',
+      });
 
       return res.render('chefs/index', { chefs });
     } catch (err) {
@@ -49,7 +49,7 @@ module.exports = {
 
       const quantityRecipes = recipes.length;
 
-      return res.render('admin/chefs/show', { chef, quantityRecipes, recipes });
+      return res.render('chefs/show', { chef, quantityRecipes, recipes });
     } catch (err) {
       console.error(err);
     }
@@ -69,11 +69,31 @@ module.exports = {
   },
   async put(req, res) {
     try {
-      const { name, avatar_url } = req.body;
+      if (req.file) {
+        if (req.file.length != 0) {
+          const avatarPromise = File.create({
+            name: file.filename,
+            path: file.path,
+          });
+  
+          await Promise.all(avatarPromise);
+        }
+      }
+
+      if (req.file && req.body.removed_files) {
+        const removedFiles = req.body.removed_files.split(',');
+        const lastIndex = removedFiles.length - 1;
+        removedFiles.splice(lastIndex, 1);
+  
+        const newAvatarPromise = removedFiles.map(id => File.delete(id));
+
+        await Promise.all(newAvatarPromise);
+      }
+
+      const { name } = req.body;
     
       await Chef.update(req.body.id, {
         name,
-        avatar_url,
       });
 
       return res.redirect(`/admin/chefs/${req.body.id}`);
