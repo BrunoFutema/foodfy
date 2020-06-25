@@ -160,11 +160,6 @@ section.admin-recipes {
   justify-content: center;
 }
 
-section.admin-recipes .content {
-  width: 100%;
-  margin-top: 40px;
-}
-
 section.admin-recipes .content > strong {
   color: #111;
   font-size: 24px;
@@ -222,21 +217,28 @@ section.admin-recipes .content > strong {
 }
 
 /* ==== SHOW RECIPE ADMIN */
-.header-recipe {
+.header-recipe,
+.header-user,
+.header-chef {
   margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.header-recipe strong {
+.header-recipe strong,
+.header-user strong,
+.header-chef strong {
   color: #111;
   font-size: 22px;
   font-weight: bold;
   line-height: 28px;
 }
 .header-recipe a,
-.header-recipe button {
+.header-recipe button,
+.header-user a,
+.header-user button,
+.header-chef a {
   color: #fff;
   cursor: pointer;
   background: var(--secondary-color);
@@ -248,12 +250,26 @@ section.admin-recipes .content > strong {
   border-radius: 4px;
 }
 
+.header-user button {
+  padding: 7px 44px;
+}
+
+.header-user a {
+  background-color: #aaa;
+  padding: 7px 34px;
+}
+
+.header-user a.secondary {
+  background-color: var(--secondary-color);
+}
+
 .header-recipe button:hover {
   filter: brightness(90%);
 }
 
 /* ==== RECIPE FORM ==== */
-.recipe-section {
+.recipe-section,
+.user-section {
   width: 100%;
 
   display: flex;
@@ -261,15 +277,18 @@ section.admin-recipes .content > strong {
   justify-content: center;
 }
 
-.recipe-section form {
+.recipe-section form,
+.user-section form {
   width: 100%;
 }
 
-.recipe-section form .items .item:first-child label {
+.recipe-section form .items .item:first-child label,
+.user-section form .items .item:first-child label {
   margin: 0;
 }
 
-.recipe-section form .item strong {
+.recipe-section form .item strong,
+.user-section form .item strong {
   color: #111;
   display: block;
   font-size: 16px;
@@ -278,8 +297,8 @@ section.admin-recipes .content > strong {
   margin-top: 30px;
 }
 
-.recipe-section form .item input,
-.recipe-section form .item select {
+form .item input,
+form .item select {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -289,7 +308,7 @@ section.admin-recipes .content > strong {
   width: 100%;
 }
 
-.recipe-section form .item button {
+form .item button {
   background: none;
   color: var(--secondary-color);
   cursor: pointer;
@@ -299,11 +318,11 @@ section.admin-recipes .content > strong {
   margin-top: 8px;
 }
 
-.recipe-section form .item button:hover {
+form .item button:hover {
   color: var(--primary-color);
 }
 
-.recipe-section form .item textarea {
+form .item textarea {
   border: 1px solid #ddd;
   border-radius: 4px;
   height: 257px;
@@ -313,14 +332,14 @@ section.admin-recipes .content > strong {
   width: 100%;
 }
 
-.recipe-section .content {
+.content {
   position: relative;
 }
 
-.recipe-section #form-delete {
+#form-delete {
   width: 84px;
   position: absolute;
-  right: 140px;
+  right: 178px;
 }
 
 #form-delete button {
@@ -354,6 +373,8 @@ main .chefs-background {
 }
 
 .chefs-grid {
+  margin-top: 25px;
+  
   display: grid;
   gap: 5px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -377,6 +398,7 @@ main .chefs-background {
 
 .chef img {
   width: 100%;
+  min-height: 50px;
 
   border-radius: 50%;
 
@@ -413,15 +435,15 @@ main .chefs-background {
   justify-content: center;
 }
 
-.chef-section form {
+form {
   width: 100%;
 }
 
-.chef-section form .items .item:first-child label {
+form .items .item:first-child label {
   margin: 0;
 }
 
-.chef-section form .item strong {
+form .item strong {
   color: #111;
   display: block;
   font-size: 16px;
@@ -430,7 +452,7 @@ main .chefs-background {
   margin-top: 30px;
 }
 
-.chef-section form .item input {
+form .item input {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -440,7 +462,7 @@ main .chefs-background {
   width: 100%;
 }
 
-.chef-section form .item button {
+form .item button {
   background: none;
   color: var(--secondary-color);
   cursor: pointer;
@@ -450,11 +472,11 @@ main .chefs-background {
   margin-top: 8px;
 }
 
-.chef-section form .item button:hover {
+form .item button:hover {
   color: var(--primary-color);
 }
 
-.chef-section form .item textarea {
+form .item textarea {
   border: 1px solid #ddd;
   border-radius: 4px;
   height: 257px;
@@ -462,16 +484,6 @@ main .chefs-background {
   padding: 12px;
   resize: none;
   width: 100%;
-}
-
-.chef-section .content {
-  position: relative;
-}
-
-.chef-section #form-delete {
-  width: 84px;
-  position: absolute;
-  right: 120px;
 }
 
 #form-delete button {
@@ -482,7 +494,7 @@ main .chefs-background {
   font-weight: bold;
   line-height: 19px;
   letter-spacing: 0.5px;
-  padding: 7px 18px;
+  padding: 7px 34px;
   border-radius: 4px;
 }
 
@@ -508,7 +520,7 @@ main .chefs-background {
   font-weight: bold;
   line-height: 19px;
   letter-spacing: 0.5px;
-  padding: 7px 18px;
+  padding: 7px 34px;
   border-radius: 4px;
 }
 
@@ -792,4 +804,79 @@ main .chefs-background {
   justify-content: center;
 
   transition: 400ms;
+}
+
+/* ==== CREATE USER ==== */
+.user-section .items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+}
+
+.user-section .is-admin {
+  margin-top: 16px;
+}
+
+.user-section .is-admin input {
+  cursor: pointer;
+}
+
+.user-section .is-admin strong {
+  color: #222;
+  font-size: 16px;
+}
+
+.users .users-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
+}
+
+.user {
+  margin: 10px 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.user span:nth-of-type(1) {
+  color: #222;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.user span:nth-of-type(2) {
+  color: #777;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+.user .actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.user .actions a {
+  cursor: pointer;
+  color: var(--secondary-color);
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 20px;
+}
+
+.user .actions a:hover {
+  color: #705ef8;
+}
+
+.user .actions form button {
+  cursor: pointer;
+  color: #DC4747;
+  font-weight: bold;
+  font-size: 14px;
+  background: transparent;
+}
+
+.user .actions form button:hover {
+  color: #ff0404;
 }

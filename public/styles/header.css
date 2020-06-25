@@ -11,6 +11,18 @@ header.dark {
   background: #111;
 }
 
+header nav div.restrict-area a {
+  color:#222;
+}
+
+header nav div.restrict-area a:hover {
+  color: var(--secondary-color);
+}
+
+header nav div.restrict-area span {
+  cursor: pointer;
+}
+
 header.dark nav div.navbar a,
 header.dark nav div.restrict-area a,
 header.dark nav div.restrict-area span {
@@ -21,12 +33,30 @@ header nav {
   width: 100%;
 
   display: grid;
-  grid-template-columns: 1fr 20%;
+  /* grid-template-columns: 1fr 40%; */
 }
 
 header nav .navbar {
   display: flex;
   align-items: center;
+}
+
+header nav .search-area {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+header nav .search-area a {
+  padding-top: 4px;
+}
+
+header nav .search-area i {
+  cursor: pointer;
+}
+
+header nav .search-area i:hover {
+  color: var(--secondary-color);
 }
 
 header nav .search {
@@ -53,7 +83,7 @@ header nav .search.show button {
   border-radius: 4px;
 
   padding: 8px 16px;
-  margin-left: 10px;
+  margin: 0 10px;
 }
 
 header nav .search.show button:hover {
@@ -61,27 +91,65 @@ header nav .search.show button:hover {
 }
 
 header nav .restrict-area {
-  display: none;
-}
-
-header nav .restrict-area.show {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+}
+
+header nav .restrict-area div {
+  display: flex;
+  align-items: center;
+}
+
+header nav .restrict-area div > a.dark {
+  color: #222;
+}
+
+header nav .restrict-area div > a {
+  color: #fff;
+  margin-right: 20px;
+  margin-bottom: -5px;
+}
+
+header nav .restrict-area div > a:hover {
+  color: var(--secondary-color);
+}
+
+header nav .restrict-area span {
+  margin-left: 10px;
 }
 
 header nav .navbar img {
   cursor: pointer;
-  margin-right: 120px;
+  margin-right: 80px;
 }
 
-header nav a {
-  color: #111;
+header nav .restrict-area form {
+  display: flex;
+  justify-content: flex-end;
+}
+
+header nav button {
+  cursor: pointer;
+  color: #f0f0f0;
   font-size: 16px;
+  background-color: transparent;
+
+  display: flex;
+  align-items: center;
+}
+
+header nav button.dark {
+  color: #222;
 }
 
 header nav a:hover {
-  color: var(--primary-color);
+  color: var(--secondary-color);
+  filter: brightness(70%);
+}
+
+header nav button:hover {
+  color: var(--secondary-color);
   filter: brightness(70%);
 }
 

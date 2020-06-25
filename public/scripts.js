@@ -40,3 +40,16 @@ for (let i = 0; i < sections.length; i++) {
     }
   };
 }
+
+const currentPage = location.pathname;
+const menu = document.getElementById('main-header');
+
+if (currentPage === '/') {
+  menu.classList.remove('dark');
+  menu.querySelector('.restrict-area button').classList.add('dark');
+  menu.querySelector('img').src = '/assets/logo-dark.png';
+  menu.querySelector('#account').classList.add('dark');
+} else {
+  menu.querySelector('.restrict-area button').classList.remove('dark');
+  menu.querySelector('#account').classList.remove('dark');
+}
