@@ -60,6 +60,7 @@ async function createUsers() {
   usersIds = await Promise.all(usersPromise);
 };
 
+let recipeIds = [];
 let totalRecipes = 10;
 
 async function createRecipes() {
@@ -89,7 +90,7 @@ async function createRecipes() {
 
   const recipesPromise = recipes.map(recipe => Recipe.create(recipe));
 
-  recipesIds = await Promise.all(recipesPromise);
+  recipeIds = await Promise.all(recipesPromise);
 
   let files =  [];
   
@@ -108,10 +109,14 @@ async function createRecipes() {
 
   while (recipeFiles.length < 50) {
     recipeFiles.push({
-      recipe_id: recipeFileIds[Math.floor(Math.random() * 50)],
+      recipe_id: recipeIds[Math.floor(Math.random() * 10)],
       file_id: recipeFileIds[Math.floor(Math.random() * totalRecipes)],
     });
   }
+
+  const recipeFilesPromise = recipeFiles.map(recipeFile => RecipeFiles.create(recipeFile));
+
+  await Promise.all(recipeFilesPromise);
 }
 
 async function init() {
