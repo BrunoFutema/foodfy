@@ -1,4 +1,3 @@
-
 const faker = require('faker');
 const { hash } = require('bcrypt');
 
@@ -19,7 +18,7 @@ async function createChefs() {
   while (files.length < totalChefs) {
     files.push({
       name: faker.image.image(),
-      path: `public/images/avatar.png`,
+      path: `public/images/avatar${Math.ceil(Math.random() * 6)}.png`,
     });
   }
 
@@ -97,7 +96,7 @@ async function createRecipes() {
   while (files.length < 50) {
     files.push({
       name: faker.image.image(),
-      path: `public/images/placeholder.png`,
+      path: `public/images/placeholder${Math.ceil(Math.random() * 6)}.png`,
     });
   }
 

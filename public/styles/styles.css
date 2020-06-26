@@ -20,6 +20,11 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 input, textarea, button {
   outline: none;
   font-family: 'Roboto', sans-serif;
