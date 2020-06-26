@@ -10,7 +10,7 @@ const Validator = require('../app/validators/chef');
 
 routes.get('/', ChefController.index);
 routes.get('/create', onlyUsers, onlyAdmin, ChefController.create);
-routes.get('/:id', onlyUsers, ChefController.show);
+routes.get('/:id', ChefController.show);
 routes.get('/:id/edit', onlyUsers, onlyAdmin, ChefController.edit);
 
 routes.post('/', onlyUsers, onlyAdmin, multer.single('avatar'), Validator.post, ChefController.post);
