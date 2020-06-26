@@ -23,6 +23,10 @@
 	<a href="#information_source-how-to-use">How To Use</a>
 </p>
 
+<p align="center">
+  <img width="100%" height="100%" src="https://github.com/BrunoFutema/foodfy/blob/develop/public/assets/foodfy.gif" height="1920" width="1080" alt="Foodfy" />
+</p>
+
 ## :rocket: Technologies
 
 These projects were developed with the technologies.
